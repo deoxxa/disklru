@@ -37,8 +37,6 @@ import (
 	"time"
 
 	"github.com/cznic/kv"
-
-	"github.com/tsileo/blobstash/config/pathutil"
 )
 
 func dirsPermutations() []string {
@@ -95,9 +93,6 @@ type CacheItem struct {
 
 // New initialize a new DiskLRU.
 func New(path string, f func(string, interface{}) ([]byte, error), maxSize uint32) (*DiskLRU, error) {
-	if path == "" {
-		path = pathutil.CacheDir()
-	}
 	if err := os.MkdirAll(path, 0700); err != nil {
 		return nil, err
 	}
